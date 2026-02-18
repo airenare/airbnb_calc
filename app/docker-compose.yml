@@ -1,5 +1,4 @@
 # Docker compose file for the Streamlit Airbnb Profit Calculator web application.
-version: '3.8'
 services:
   airbnb_calc:
     build: .
