@@ -4,8 +4,8 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-RUN apt-get update 
-RUN apt-get install -y \
+RUN apt update 
+RUN apt install -y \
     build-essential \
     curl \
     software-properties-common \
