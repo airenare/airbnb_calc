@@ -11,10 +11,12 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone repo
-RUN git clone https://github.com/airenare/airbnb_calc.git /app
+RUN git clone https://github.com/airenare/airbnb_calc.git .
 
 # Install Python dependencies
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir streamlit
+RUN pip3 install --no-cache-dir numpy
+RUN pip3 install --no-cache-dir plotly
 
 EXPOSE 8501
 
