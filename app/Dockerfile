@@ -11,7 +11,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone repo
-RUN git clone https://github.com/airenare/airbnb_calc.git .
+RUN git clone https://github.com/airenare/airbnb_calc.git /app
 
 # Install Python dependencies
 RUN pip3 install --no-cache-dir -r requirements.txt
