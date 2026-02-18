@@ -34,3 +34,6 @@ renovation_loan_rate = 0.080
 ## AirBnB Rates
 nightly_rate = 350
 occupancy_rate = 0.49
+
+# Home Prices for the Break-Even Curves Plot
+home_prices = [150000, 200000, 250000, 300000, 350000, 400000, 450000, 475000, 500000, 550000]

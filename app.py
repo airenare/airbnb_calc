@@ -5,11 +5,26 @@ import default_values
 
 
 # Enable wide mode
-st.set_page_config(layout="wide", page_title="Airbnb Profit Calculator", page_icon="🏠")
+st.set_page_config(layout="wide", 
+                   page_title="Airbnb Profit Calculator", 
+                   page_icon="🏠", 
+                   initial_sidebar_state="expanded")
+# Enable dark mode by default
+st.markdown("""
+    <style>
+    @media (prefers-color-scheme: dark) {
+        .stApp {
+            background-color: #0E1117;
+            color: #FFFFFF;
+        }
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # SIDEBAR
 sidebar = st.sidebar
 sidebar.header("Parameters not changed often")
+
 ## Mortgage
 sidebar.subheader("Mortgage")
 side_col1, side_col2 = sidebar.columns(2)
@@ -58,8 +73,8 @@ insurance_cost = sidebar.number_input("Monthly Insurance Cost", value=default_va
 
 
 
-# MAIN PAGE
-#st.title("Airbnb Profit Calculator")
+# MAIN PAGE SECTION
+st.title("Airbnb Profit Calculator")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -193,8 +208,8 @@ with col2:
 
     rate_range = np.linspace(nightly_rate * 0.5, nightly_rate * 1.5, 80)
     occupancy_range = np.linspace(0.10, 0.95, 80)
-    R, O = np.meshgrid(rate_range, occupancy_range)
-    profit_surface = calculate_annual_profit(R, O)
+    RR, OR = np.meshgrid(rate_range, occupancy_range)
+    profit_surface = calculate_annual_profit(RR, OR)
 
     # PLOTTING
     fig = go.Figure()
@@ -269,19 +284,19 @@ with col2:
 col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
     st.header("Expenses")
-    st.write(f"\${total_monthly_expenses:,.0f} per month")
-    st.subheader(f"\${total_annual_expenses:,.0f}")
+    st.write(f"${total_monthly_expenses:,.0f} per month")
+    st.subheader(f"${total_annual_expenses:,.0f}")
 
 
 with col2:
     st.header("Revenue")
-    st.write(f"\${monthly_revenue:,.0f} per month")
-    st.subheader(f"\${annual_revenue:,.0f}")
+    st.write(f"${monthly_revenue:,.0f} per month")
+    st.subheader(f"${annual_revenue:,.0f}")
 
 with col3:
     st.header("Profit")
-    st.write(f"\${net_monthly_profit:,.0f} per month")
-    st.subheader(f"\${net_annual_profit:,.0f}")
+    st.write(f"${net_monthly_profit:,.0f} per month")
+    st.subheader(f"${net_annual_profit:,.0f}")
 
 with col4:
     st.header("Margin")
@@ -322,14 +337,9 @@ st.table(expense_df)
 st.divider()
 st.subheader("Break-Even Curves by Home Price")
 
-import numpy as np
-import plotly.graph_objects as go
+home_prices = default_values.home_prices
 
-home_prices = [150000, 200000, 250000, 300000, 350000, 400000, 450000, 475000, 500000, 550000]
-
-rate_range = np.linspace(nightly_rate * 0.5,
-                         nightly_rate * 1.5,
-                         300)
+rate_range = np.linspace(nightly_rate * 0.5, nightly_rate * 1.5, 300)
 
 fig = go.Figure()
 
