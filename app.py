@@ -413,7 +413,7 @@ fig.update_layout(
     legend_title="Home Price",
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width='stretch')
 
 
 # add copyright notice at the bottom "© 2026 Anton B. All rights reserved."
