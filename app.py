@@ -107,7 +107,7 @@ with col1:
         with scol2:
             renovation_loan_years = st.number_input("Length of loan", value=default_values.renovation_loan_years, min_value=1, max_value=50, step=1)
         with scol3:
-            renovation_loan_rate = st.number_input("Renovation Loan Rate", value=default_values.renovation_loan_rate, step=0.005, format="%.3f")
+            renovation_loan_rate = st.number_input("Reno Loan Rate", value=default_values.renovation_loan_rate, step=0.005, format="%.3f")
         monthly_renovation_payment = renovation_costs * renovation_loan_rate / 12 / (1 - (1 + renovation_loan_rate / 12) ** (-renovation_loan_years * 12))
         annual_renovation_payment = renovation_costs * renovation_loan_rate / (1 - (1 + renovation_loan_rate) ** (-renovation_loan_years))
         
