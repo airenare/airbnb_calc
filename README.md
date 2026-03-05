@@ -41,7 +41,10 @@ Make the launcher script executable:
 
 ```bash
 chmod +x run_streamlit.sh
+```
+
 ### ✅ Automatic Setup + Run (interactive)
+```bash
 ./run_streamlit.sh
 ```
 
