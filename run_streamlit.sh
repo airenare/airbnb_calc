@@ -38,7 +38,7 @@ fi
 
 cd $PROJECT_DIR;
 echo 'Starting Streamlit...';
-streamlit run $APP_FILE
+python3 -m streamlit run $APP_FILE
 "
 
 # 4. Send commands into tmux
