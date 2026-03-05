@@ -23,17 +23,18 @@ hoa_fee = 150
 insurance_cost = 200
 
 ## Property
-property_price = 300000
-downpayment = 0
+property_price = 280000
+downpayment = 50000
+closing_costs = 5700
 
 ## Renovation and Furnishing
-renovation_cost = 15000
+renovation_cost = 10000
 renovation_loan_years = 5
 renovation_loan_rate = 0.080
 
 ## AirBnB Rates
-nightly_rate = 350
-occupancy_rate = 0.49
+nightly_rate = 400
+occupancy_rate = 0.55
 
 # Home Prices for the Break-Even Curves Plot
 home_prices = [150000, 200000, 250000, 300000, 350000, 400000, 450000, 475000, 500000, 550000]

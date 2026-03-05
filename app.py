@@ -79,20 +79,23 @@ st.title("Airbnb Profit Calculator")
 col1, col2 = st.columns(2)
 with col1:
     st.subheader("Property")
-    scol1, scol2 = st.columns(2)
+    scol1, scol2, scol3 = st.columns(3)
     with scol1:
         property_price = st.number_input("Price ($)", value=default_values.property_price, min_value=10000, max_value=1000000, step=10000)
     with scol2:
         downpayment = st.number_input("Down ($)", value=default_values.downpayment, min_value=0, max_value=property_price, step=10000)
+    with scol3:
+        closing_costs = st.number_input("Closing Costs", value=default_values.closing_costs, step=1000)
 
+    # Calculate monthly mortgage payment
+    mortgage_amount = property_price - downpayment
+    monthly_mortgage_payment = (mortgage_amount * mortgage_rate / 12) / (1 - (1 + mortgage_rate / 12) ** (-mortgage_term_years * 12))
+    annual_mortgage_payment = (mortgage_amount * mortgage_rate) / (1 - (1 + mortgage_rate) ** (-mortgage_term_years))
     
     with scol1:
-        # Calculate monthly mortgage payment
-        mortgage_amount = property_price - downpayment
-        monthly_mortgage_payment = (mortgage_amount * mortgage_rate / 12) / (1 - (1 + mortgage_rate / 12) ** (-mortgage_term_years * 12))
-        annual_mortgage_payment = (mortgage_amount * mortgage_rate) / (1 - (1 + mortgage_rate) ** (-mortgage_term_years))
 
         st.write(f"Monthly Mortgage: ${monthly_mortgage_payment:,.0f}")
+    with scol2:
         st.write(f"Annual Mortgage: ${annual_mortgage_payment:,.0f}")
     
     with col2:
@@ -144,6 +147,7 @@ annual_management_fee = annual_revenue * management_fee_rate
 
 # Total monthly expenses
 total_annual_expenses = (
+    closing_costs +
     annual_mortgage_payment +
     annual_renovation_payment +
     annual_tax +
@@ -161,6 +165,7 @@ total_monthly_expenses = total_annual_expenses / 12
 # Dictionary of expenses
 expenses = {
     "Mortgage Payment": [monthly_mortgage_payment, annual_mortgage_payment],
+    "Closing Costs (year 1)": [closing_costs / 12, closing_costs],
     "Renovation Loan Payment": [monthly_renovation_payment, annual_renovation_payment],
     "Property Tax": [monthly_tax, annual_tax],
     "Management Fee": [monthly_management_fee, annual_management_fee],
@@ -178,6 +183,7 @@ def calculate_annual_profit(rate, occupancy_fraction):
     annual_revenue = rate * occupancy_fraction * 365
 
     annual_fixed_expenses = (
+        closing_costs +
         annual_mortgage_payment +
         annual_renovation_payment +
         annual_tax +
@@ -189,7 +195,7 @@ def calculate_annual_profit(rate, occupancy_fraction):
         hoa_fee * 12
     )
 
-    all_expenses = annual_airbnb_fee + annual_management_fee + annual_fixed_expenses
+    all_expenses = annual_airbnb_fee + annual_management_fee + annual_fixed_expenses + closing_costs
     
     profit = (annual_revenue - all_expenses)
     
@@ -284,27 +290,27 @@ with col2:
 col1, col2, col3, col4, col5 = st.columns(5)
 with col1:
     st.header("Expenses")
-    st.write(f"${total_monthly_expenses:,.0f} per month")
-    st.subheader(f"${total_annual_expenses:,.0f}")
+    st.write(f"${total_monthly_expenses:,.0f} /mo")
+    st.subheader(f"${total_annual_expenses:,.0f} /yr")
 
 
 with col2:
     st.header("Revenue")
-    st.write(f"${monthly_revenue:,.0f} per month")
-    st.subheader(f"${annual_revenue:,.0f}")
+    st.write(f"${monthly_revenue:,.0f} /mo")
+    st.subheader(f"${annual_revenue:,.0f} /yr")
 
 with col3:
     st.header("Profit")
-    st.write(f"${net_monthly_profit:,.0f} per month")
-    st.subheader(f"${net_annual_profit:,.0f}")
+    st.write(f"${net_monthly_profit:,.0f} /mo")
+    st.subheader(f"${net_annual_profit:,.0f} /yr")
 
 with col4:
     st.header("Margin")
     if monthly_revenue > 0:
         margin_monthly = (net_monthly_profit / monthly_revenue) * 100
         margin_annual = (net_annual_profit / annual_revenue) * 100
-        st.write(f"{margin_monthly:.0f}% per month")
-        st.subheader(f"{margin_annual:.0f}%")
+        st.write(f"{margin_monthly:.0f}% /mo")
+        st.subheader(f"{margin_annual:.0f}% /yr")
     else:
         st.write("N/A")
         st.subheader("N/A")
@@ -313,10 +319,10 @@ with col5:
     st.header("ROI")
     total_investment = downpayment + renovation_costs
     if total_investment > 0:
-        roi_monthly = (net_monthly_profit * 12) / total_investment * 100
+        roi_monthly = (net_monthly_profit) / total_investment * 100
         roi_annual = (net_annual_profit) / total_investment * 100
-        st.write(f"{roi_monthly:.0f}% per month")
-        st.subheader(f"{roi_annual:.0f}%")
+        st.write(f"{roi_monthly:.0f}% /mo")
+        st.subheader(f"{roi_annual:.0f}% /yr")
     else:
         st.write("N/A")
         st.subheader("N/A")
@@ -335,7 +341,7 @@ st.table(expense_df)
 # ==========================================================
 
 st.divider()
-st.subheader("Break-Even Curves by Home Price")
+st.subheader("Break-Even Curves by Home Price (not accounting for closing costs)")
 
 home_prices = default_values.home_prices
 
