@@ -16,7 +16,7 @@ It’s built with Python + Streamlit, and includes a one‑click setup script th
 | app.py | Main Streamlit application |
 | default_values.py | Default model values |
 | requirements.txt | Python dependencies |
-| run_streamlit.sh | Portable one‑click setup + run script |
+| deploy.sh | Portable one‑click setup + run script |
 | .python-version | pyenv Python version file |
 
 ## 🛠 Installation & Setup
@@ -40,12 +40,12 @@ cd airbnb_calc
 Make the launcher script executable:
 
 ```bash
-chmod +x run_streamlit.sh
+chmod +x deploy.sh
 ```
 
 ### ✅ Automatic Setup + Run (interactive)
 ```bash
-./run_streamlit.sh
+./deploy.sh
 ```
 
 The script will:
@@ -61,7 +61,7 @@ The script will:
 To skip all confirmations and run non‑interactively:
 
 ```bash
-./run_streamlit.sh --force
+./deploy.sh --force
 ```
 
 ## 🔎 How to Access the App
@@ -80,7 +80,7 @@ Open in your browser to interact with the calculator.
 
 ### 🧠 What the Script Does
 
-The provided run_streamlit.sh automates environment setup using pyenv, ensuring:
+The provided deploy.sh automates environment setup using pyenv, ensuring:
 Correct Python version installed
 - A stable virtual environment
 - Dependencies installed
