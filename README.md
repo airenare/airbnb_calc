@@ -51,7 +51,7 @@ chmod +x deploy.sh
 The script will:
 - Install pyenv if missing
 - Install Python 3.12.2 via pyenv
-- Create a virtual environment under ~/venv/3.12.2
+- Create a virtual environment under ./.venv/3.12.2
 - Install dependencies from requirements.txt
 - Clone (or update) the project repository
 - Start the app inside a tmux session
