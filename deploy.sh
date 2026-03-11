@@ -5,7 +5,8 @@
 SESSION_NAME="streamlit"
 WINDOW_NAME="streamlit"
 PYTHON_VERSION="3.12.2"
-VENV_DIR="$HOME/venv/$PYTHON_VERSION"
+# VENV_DIR="$HOME/venv/$PYTHON_VERSION" # Changed to .venv for better organization
+VENV_DIR="./.venv/$PYTHON_VERSION"
 VENV_PATH="$VENV_DIR/bin/activate"
 PROJECT_DIR="$HOME/Work/airbnb_calc"
 GIT_URL="https://github.com/airenare/airbnb_calc.git"
