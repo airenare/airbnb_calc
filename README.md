@@ -6,9 +6,32 @@ This is an experiment for fun, not a professional financial tool.
 It’s built with Python + Streamlit, and includes a one‑click setup script that automatically prepares the environment (including installing Python via pyenv, virtual environment, deps, etc.) so you can run the app on any machine.
 
 ## 🚀 Features
-- Adjust key rental parameters and see projected profit
-- Real‑time interactive UI powered by Streamlit
-- Automatic environment setup script for easy installation
+
+**Inputs (sidebar — infrequent parameters)**
+- Mortgage rate and term
+- Airbnb host fee rate (3% or 15.5%)
+- Property management fee rate
+- Property tax rate
+- Utilities: electricity, water, gas, internet, garbage collection, HOA
+- Insurance
+
+**Inputs (main area — frequently adjusted)**
+- Property price, down payment, and closing costs → auto-calculated monthly/annual mortgage payment
+- Renovation & furnishing costs with separate loan rate and term → auto-calculated loan payment
+- Nightly rate and occupancy rate → projected gross revenue
+
+**Metrics (monthly and annual)**
+- Total Expenses, Revenue, Profit
+- Profit Margin
+- ROI (based on down payment + renovation costs)
+
+**Charts**
+- Profit contour plot across nightly rate × occupancy combinations, with a break-even line and a "You are here" marker for the current strategy
+- Break-even occupancy curves across multiple home price scenarios
+
+**Other**
+- Itemized expense breakdown table
+- Automatic environment setup via `deploy.sh`
 
 ## 📦 Repository Contents
 | File | Description |
